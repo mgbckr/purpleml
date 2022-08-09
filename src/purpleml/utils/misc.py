@@ -51,22 +51,6 @@ def group_apply(data, groups, func, axis=0, func_params=None, order=None, return
             raise Exception(f"Don't know what to with order: {order}")
 
 
-def subplots(n, n_per_break, break_row=True, figsize_single=None, **kwargs):
-    n_breaks = int(np.ceil(n / n_per_break))
-    n_per_break = min(n_per_break, n)
-
-    if figsize_single is not None:
-        if isinstance(figsize_single , int):
-            kwargs["figsize"] = (kwargs["figsize"] * n_per_break, kwargs["figsize"] * n_breaks)
-        else:
-            kwargs["figsize"] = (figsize_single[0] * n_per_break, figsize_single[1] * n_breaks)
-
-    if break_row:
-        return plt.subplots(n_breaks, n_per_break, **kwargs)
-    else:
-        return plt.subplots(n_per_break, n_breaks, **kwargs)
-
-
 def rankcolumns(a, method="average"):
     b = np.empty_like(a)
     for i in range(a.shape[1]):
