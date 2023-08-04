@@ -1,5 +1,7 @@
+import logging, warnings
 import functools
 from collections import OrderedDict
+
 
 
 class Recipe():
@@ -27,9 +29,6 @@ class Recipe():
         if step_type not in ["branch", "optional branch", "switch", "fixed", None]:
             raise ValueError(f"Unknown step type: {step_type}")
         
-        if recipe is None:
-            raise ValueError("Recipe needs to be defined.")
-
         def decorator_recipe_ingredient(func):
 
             @functools.wraps(func)
@@ -219,10 +218,10 @@ class Recipe():
         return results
        
         
-    def clean_cache() -> bool:
+    def clean_cache(self) -> bool:
         """Clean cache based on step additions"""
-        if this.cache is not None:
-            this.cache.clear()
+        if self.cache is not None:
+            self.cache.clear()
             return True
         else:
             return False
