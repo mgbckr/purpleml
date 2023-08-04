@@ -1,12 +1,8 @@
 # purpleml
 
-Add a short description here!
+Collection of tools for everyday machine learning and data science tasks ... probaby hopelessly overengineered.
 
-
-## Description
-
-A longer description of your project goes here...
-
+TODO: This is an initial commit and needs some docmentation.
 
 <!-- pyscaffold-notes -->
 
