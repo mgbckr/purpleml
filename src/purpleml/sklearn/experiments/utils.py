@@ -18,12 +18,10 @@ import sklearn.pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils import check_array
 
-import mlflowhelper.tracking.collections
-
-from purpleml.utils.misc import select
-from purpleml.utils.timer import Timer
-from purpleml.sklearn.model_selection import LenientlyStratifiedKFold, StratifiedGroupKFold, ShuffledGroupKFold
-from purpleml.sklearn.model_selection.validation.cross_validate import cross_validate_repeatedly
+from ...utils.misc import select
+from ...utils.timer import Timer
+from ..model_selection import LenientlyStratifiedKFold, LenientlyStratifiedGroupKFold, StratifiedGroupKFold, ShuffledGroupKFold
+from ..model_selection.validation.cross_validate import cross_validate_repeatedly
 
 
 def run_experiment(
@@ -321,6 +319,8 @@ def run_experiments(
     if isinstance(save_experiment, str):
         if save_experiment == "set_result_container":
             if pre_experiment_hook == "mlflow-sync":
+
+                import mlflowhelper.tracking.collections
 
                 def save_experiment(exp_name, exp, result, result_container):
                     if isinstance(result, Exception):
@@ -1233,8 +1233,8 @@ def get_default_pipeline_classification(
             classifier = sklearn.ensemble.RandomForestClassifier(**{**dict(n_estimators=rf_n), **classifier_params})
         elif classifier == "en_cv":
             classifier = get_default_model_classification_en_cv(groups=groups, **classifier_params)
-        elif classifier == "feature":
-            classifier = nalabtools.sklearn.estimator.FeatureClassifier(**classifier_params)
+        # elif classifier == "feature":
+        #     classifier = FeatureClassifier(**classifier_params)
         elif classifier == "logistic":
             classifier = sklearn.linear_model.LogisticRegression(**classifier_params)
         else:
